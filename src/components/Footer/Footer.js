@@ -92,7 +92,7 @@ function Footer() {
           </span>
           <span className=" flex  w-[100%] md:w-56 gap-2 justify-start items-center text-left">
             <PhoneIcon />
-            +91 522-7118094
+            0522-7118094
           </span>
           <span className=" flex  w-[100%] md:w-56 gap-2 justify-start items-center text-left">
             <FacebookIcon />
