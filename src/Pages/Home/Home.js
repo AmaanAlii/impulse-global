@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import "./Home.css";
+
+import Lottie from "react-lottie";
+import animationData from "../../Assets/Animations/MouseScrollAnimation.json";
 
 import PrimaryBtn from "../../components/PrimaryBtn/PrimaryBtn";
 import CircularCards from "../../components/Circular Cards/CircularCards";
@@ -25,6 +28,8 @@ import HomeAboutCompanyChatIcon from "../../Assets/Home/HomeAboutCompanyChatIcon
 import BlogsShowCaseSection from "../../components/BlogsShowCaseSection/BlogsShowCaseSection";
 import internalLinks from "../../internalLinks";
 import FooterCta from "../../components/FooterCta/FooterCta";
+import ClientsTestimonialShowcase from "../../components/ClientsTestimonialShowcase/ClientsTestimonialShowcase";
+import EnquiryModal from "../../components/EnquiryModal/EnquiryModal";
 
 function Home() {
   const aboutUsCardsData = [
@@ -32,25 +37,25 @@ function Home() {
       number: "15+",
       heading: "Years in Business",
       description:
-        "Started by two stalwart American traders, and having been conceived on the lines of the world class NYSE and NASDAQ trading cultures, Impulse Capital has come a long way in finding its footing in the still developing Indian market.",
+        "Started by two stalwart American traders, and having been conceived on the lines of the world class NYSE and NASDAQ trading cultures, Impulse Global LLC has come a long way in finding its footing in the still developing Indian market.",
     },
     {
       number: "40+",
       heading: "Companies Supported",
       description:
-        "After putting together two success stories in America, it was an inspired decision to venture into the Indian market. And thus, in the year, 2020, Impulse Capital came into existence as a small one point set up in Lucknow.",
+        "After putting together two success stories in America, it was an inspired decision to venture into the Indian market. And thus, in the year, 2020, Impulse Global LLC came into existence as a small one point set up in India.",
     },
     {
       number: "3M",
       heading: "Milllion USD Worth of Investments",
       description:
-        "Starting out in Lucknow had its own challenges, as is the case when you embrace a new country, its culture, its laws and most importantly its people. Impulse Capital took the first baby steps towards becoming the leader of online global trading in India.",
+        "Starting out in India had its own challenges, as is the case when you embrace a new country, its culture, its laws and most importantly its people. Impulse Global LLC took the first baby steps towards becoming the leader of online global trading in India.",
     },
     {
       number: "15+",
       heading: "Network of Investors",
       description:
-        "As the years passed, Impulse Capital managed to convince one and all about the robustness of the sector and the endless possibilities associated with online global trading that it had thrown up for the aspiring Indian trader.",
+        "As the years passed, Impulse Global LLC managed to convince one and all about the robustness of the sector and the endless possibilities associated with online global trading that it had thrown up for the aspiring Indian trader.",
     },
   ];
 
@@ -63,13 +68,13 @@ function Home() {
       img: WelcomeCardImg1,
       heading: "Startups",
       description:
-        "Impulse Capital supports Founders seeking help in infusing fresh ideas into the business community",
+        "Impulse Global LLC supports Founders seeking help in infusing fresh ideas into the business community",
     },
     {
       img: WelcomeCardImg2,
       heading: "Investors",
       description:
-        "Receive Potential Business deals and inbound investment opportunities from Impulse Capital",
+        "Receive Potential Business deals and inbound investment opportunities from Impulse Global LLC",
     },
     {
       img: WelcomeCardImg3,
@@ -86,14 +91,48 @@ function Home() {
   ];
 
   const renderedWelcomeCards = welcomeCardsData.map((props, index) => (
-    <WelcomeCard props={props} />
+    <WelcomeCard key={index} props={props} />
   ));
 
+  const defaultOptionsForLottie = {
+    loop: false,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
+  const [animate, setAnimate] = useState(false);
+
+  useEffect(() => {
+    setAnimate(true);
+
+    setTimeout(() => {
+      setAnimate(false);
+    }, 7000);
+  }, []);
+
   return (
-    <div className=" home-section mt-28 md:mt-14 lg:mt-0 bg-primaryBgDark text-primaryWhite flex items-center justify-center gap-[50px] xl:gap-[100px] flex-col">
+    <div className=" home-section w-[100%] mt-28 md:mt-14 lg:mt-[100px] bg-primaryBgDark text-primaryWhite flex items-center justify-center gap-[50px] xl:gap-[100px] flex-col relative">
+      <h4 className=" text-primaryWhite text-9xl font-bold tracking-widest -rotate-90 absolute hidden sm:flex sm:-left-[65%] md:top-[50%] md:-left-[48%] lg:-left-[38%] xl:-left-[35%] lg:top-[40%] -z-1 mix-blend-overlay ">
+        RAISE MONEY  
+      </h4>
+      <div
+        className={` w-[6vw] absolute transition-all duration-500 ${
+          animate ? "top-[8%]" : " top-[20%] hidden"
+        } `}
+      >
+        <Lottie
+          options={defaultOptionsForLottie}
+          height={"100%"}
+          width={"100%"}
+        />
+      </div>
+
       {/* Home Banner Starts Here */}
       <div
-        className=" home-banner-section flex pb-10 lg:pb-0 lg:h-80v w-11/12 bg-no-repeat bg-secondaryBgDark flex-col lg:flex-row md:px-20 md:mt-10 gap-20 "
+        className=" home-banner-section flex pb-10 lg:pb-0 w-11/12 bg-no-repeat bg-secondaryBgDark py-10 flex-col lg:flex-row md:px-20 md:mt-10 gap-20 rounded-md "
         style={{
           backgroundImage: `url(${HomeBannerBgImg})`,
           backgroundPosition: "right",
@@ -107,9 +146,13 @@ function Home() {
             Backing founders building breakthroughs for a better world
           </span>
           {/* <span>Backing founders buildingbreakthroughs for a better world</span> */}
-          <PrimaryBtn>Get Started</PrimaryBtn>
+          <EnquiryModal>
+            <div>
+              <PrimaryBtn>Get Started</PrimaryBtn>
+            </div>
+          </EnquiryModal>
         </div>
-        <div className=" flex flex-col lg:w-6/12 h-full items-center justify-center ">
+        <div className=" flex flex-col lg:w-6/12 h-full py-10 items-center justify-center ">
           <img className=" lg:w-8/12" src={HomeBannerRightImg} alt="invest" />
         </div>
       </div>
@@ -118,9 +161,9 @@ function Home() {
       {/* Home About Us Section Starts Here*/}
       <div className=" w-full flex flex-col justify-center items-center gap-10">
         <div className=" w-[90%] flex flex-col justify-center items-center">
-          <h2 className=" text-4xl font-bold mb-3">About Impulse Capital</h2>
+          <h2 className=" text-4xl font-bold mb-3">About Impulse Global LLC</h2>
           <span className=" md:w-3/4 text-secondaryTextGrey flex">
-            With its American roots and Indian ethos, Impulse Capital has
+            With its American roots and Indian ethos, Impulse Global LLC has
             managed to make deep inroads into the trading sector in the last one
             decade.
           </span>
@@ -132,7 +175,7 @@ function Home() {
       {/* Home About Us Section Ends Here*/}
 
       {/* Home Welcome Section Starts Here*/}
-      <div className=" w-[90%] xl:h-90v flex flex-col-reverse xl:flex-row xl:gap-0 gap-[50px] justify-center md:justify-between items-center p-[20px] bg-primaryWhite text-primaryBgDark rounded-sm">
+      <div className=" w-[90%]  flex flex-col-reverse xl:flex-row xl:gap-0 gap-[50px] justify-center md:justify-between items-center p-[20px] bg-primaryWhite text-primaryBgDark rounded-sm z-0">
         <div className=" flex flex-wrap xl:w-[55%] justify-center items-center gap-5 relative ">
           <div className=" h-[50%] w-[100%] bg-purple-300 absolute rounded-lg bottom-20">
             <img
@@ -147,10 +190,10 @@ function Home() {
         </div>
         <div className=" flex flex-col text-left xl:w-[40%] h-[90%] justify-start gap-10">
           <h4 className=" text-3xl md:text-5xl font-semibold">
-            Welcome To Impulse Capital
+            Welcome To Impulse Global LLC
           </h4>
           <p>
-            Impulse Capital brings together Entrepreneurs, Investors, Mentors
+            Impulse Global LLC brings together Entrepreneurs, Investors, Mentors
             and Partners together on one platform to help startupsmetamorphose
             into big future businesses.
           </p>
@@ -168,7 +211,7 @@ function Home() {
 
       {/* Home About Company Section Starts Here*/}
 
-      <div className=" md:p-5 py-10 px-5 gap-10 flex flex-col md:flex-row justify-center md:justify-between text-left bg-primaryWhite text-ternaryTextGrey w-[90%] rounded-sm ">
+      <div className=" md:p-5 py-10 px-5 gap-10 flex flex-col md:flex-row justify-center md:justify-between text-left bg-primaryWhite text-ternaryTextGrey w-[90%] rounded-sm z-0 ">
         <div className=" flex flex-col md:w-[45%] gap-10">
           <h4 className=" font-bold text-4xl text-primaryBgDark">
             About Company
@@ -205,6 +248,8 @@ function Home() {
       </div>
 
       {/* Home About Company Section Ends Here*/}
+
+      <ClientsTestimonialShowcase />
 
       <BlogsShowCaseSection />
 

@@ -3,6 +3,7 @@ const internalLinks = {
   services: "/services",
   careers: "/careers",
   blog: "/blog",
+  singleBlog: "/latest-news",
   about: "/about",
   contact: "/contact",
   termsOfUse: "/terms-of-use",

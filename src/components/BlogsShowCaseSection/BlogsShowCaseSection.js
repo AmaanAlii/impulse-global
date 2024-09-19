@@ -16,9 +16,9 @@ function BlogsShowCaseSection() {
           <h4 className=" text-4xl font-bold text-primaryHighlight">
             Our Blog
           </h4>
-          <span className=" text-secondaryTextGrey w-[60%] md:w-auto">
+          {/* <span className=" text-secondaryTextGrey w-[60%] md:w-auto">
             Lorem ipsum dolor sit amet consectetur adipiscing elit.
-          </span>
+          </span> */}
         </div>
         <PrimaryBtn link={internalLinks.blog}>See More</PrimaryBtn>
       </div>
